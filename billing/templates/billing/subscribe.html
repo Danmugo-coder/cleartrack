@@ -1,0 +1,115 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Subscription Plans - Cleartrack{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if trial_expired %}
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <strong>Your 14-day trial has expired.</strong> Please upgrade to continue using Cleartrack.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    <div class="text-center mb-4">
+        <h1 class="fw-bold">Choose Your Plan</h1>
+        <p class="text-muted">14-Day Free Trial. Upgrade anytime to keep using Cleartrack.</p>
+        <div class="form-check form-switch d-inline-flex align-items-center mt-3 fs-5">
+            <input class="form-check-input me-2" type="checkbox" id="billingToggle">
+            <label class="form-check-label fw-semibold" for="billingToggle">
+                Toggle <span class="text-primary">Yearly Billing</span> <small class="text-muted">(Save 20%)</small>
+            </label>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" id="pricingCards">
+        <!-- Cards will be injected here -->
+    </div>
+</div>
+
+<script>
+    const plans = [
+        {
+            id: 1,
+            name: "Basic",
+            monthly: 10,
+            yearly: 96,
+            features: [
+                "Admin Dashboard",
+                "User, Landlord & Student Management",
+                "1 Admin Account",
+                "Create Clearance Forms",
+                "QR Code Scanning (Basic)",
+                "Standard Reports",
+                "Email Notifications",
+                "Basic Analytics Dashboard",
+                "Basic Customer Support"
+            ]
+        },
+        {
+            id: 2,
+            name: "Advanced",
+            monthly: 19,
+            yearly: 182,
+            features: [
+                "Everything in Basic",
+                "Clearance Templates + Field Rules",
+                "5 Admin Accounts",
+                "Batch QR Scanning",
+                "Course & Section Management",
+                "Advanced Analytics & Filtering",
+                "Daily Backups",
+                "Priority Email Support",
+                "Real-Time Alerts & Logs"
+            ]
+        },
+        {
+            id: 3,
+            name: "Premium",
+            monthly: 28,
+            yearly: 268,
+            features: [
+                "Everything in Advanced",
+                "Unlimited Admins + Roles",
+                "Automated Approval Workflows",
+                "API & Webhook Access",
+                "Cloud Hosting Included",
+                "Multi-Campus Support",
+                "SMS & WhatsApp Notifications",
+                "Live Chat & Phone Support",
+                "Dedicated Account Manager"
+            ]
+        }
+    ];
+
+    const container = document.getElementById('pricingCards');
+    const toggle = document.getElementById('billingToggle');
+
+    function renderPlans(isYearly = false) {
+        container.innerHTML = "";
+        plans.forEach(plan => {
+            const price = isYearly ? plan.yearly : plan.monthly;
+            const period = isYearly ? "/year" : "/month";
+            const billingType = isYearly ? 'yearly' : 'monthly';
+            const featureList = plan.features.map(f => `<li><i class="fas fa-check text-success me-2"></i>${f}</li>`).join("");
+
+            container.innerHTML += `
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center d-flex flex-column">
+                        <h4 class="card-title text-uppercase">${plan.name}</h4>
+                        <h2 class="my-3 text-primary">$${price.toFixed(2)} <small class="text-muted">${period}</small></h2>
+                        <ul class="list-unstyled text-start mb-4">${featureList}</ul>
+                        <a href="/billing/choose-payment/${plan.id}/${billingType}/" class="btn btn-outline-primary mt-auto w-100">
+                            Subscribe to ${plan.name}
+                        </a>
+                    </div>
+                </div>
+            </div>`;
+        });
+    }
+
+    toggle.addEventListener("change", () => renderPlans(toggle.checked));
+    renderPlans();
+</script>
+{% endblock %}
