@@ -113,3 +113,8 @@ def view_clearance(request, token):
     except (ValueError, TypeError, Student.DoesNotExist):
         messages.error(request, "Invalid student token or student not found.")
         return redirect('core:home')
+from django.http import JsonResponse
+
+def health_check(request):
+    return JsonResponse({"status": "ok"})
+

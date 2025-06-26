@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.decorators import login_required
-from billing.decorators import subscription_required  # Make sure you have this created
+from billing.decorators import subscription_required
 
-app_name = 'dashboard'
+app_name = 'dashboard'  # ✅ This enables namespacing
 
 urlpatterns = [
     # Dashboard root with login and subscription check
