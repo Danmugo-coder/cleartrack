@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to ClearTrack</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">Welcome to ClearTrack</h1>
+
+        <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg me-3">Sign Up</a>
+        <a href="{% url 'clearance:scan_clearance' %}" class="btn btn-outline-secondary btn-lg">View My Clearance</a>
+    </div>
+</body>
+</html>
