@@ -257,34 +257,6 @@
 </style>
 {% endblock %}
 
-<!-- Header/Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-white" href="{% url 'core:home' %}">
-      <i class="fas fa-graduation-cap me-2"></i>cleartrack
-    </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'core:home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'accounts:login' %}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-warning text-dark fw-semibold px-4 py-2 ms-2" href="{% url 'accounts:register' %}">
-            <i class="fas fa-user-plus me-1"></i> Sign Up
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
 
 
 {% load static %}
