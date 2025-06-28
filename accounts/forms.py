@@ -1,11 +1,25 @@
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+from .models import UserProfile
+from django.contrib.auth.models import User
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Username'
+    }))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Password'
+    }))
+
+class UserProfileForm(forms.ModelForm):
+    signature_data = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ['user_type', 'department', 'signature', 'signature_data', 'auto_sign']
 class RegisterForm(forms.ModelForm):
-    full_name = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Full Name'
-        })
-    )
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control',
         'placeholder': 'Password'
@@ -17,7 +31,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['full_name', 'username', 'email', 'password']
+        fields = ['username', 'email', 'password']
 
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
@@ -31,11 +45,3 @@ class RegisterForm(forms.ModelForm):
 
         if password and confirm_password and password != confirm_password:
             self.add_error('confirm_password', "Passwords do not match")
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.first_name = self.cleaned_data.get('full_name')
-        user.set_password(self.cleaned_data['password'])  # Secure password handling
-        if commit:
-            user.save()
-        return user

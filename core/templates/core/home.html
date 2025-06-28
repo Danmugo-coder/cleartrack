@@ -257,10 +257,8 @@
 </style>
 {% endblock %}
 
-
-
-{% load static %}
 {% block content_full %}
+{% load static %}
 <!-- Hero Section -->
 <section class="hero-section">
     <div class="hero-bg-shape"></div>
@@ -268,21 +266,11 @@
         <div class="row align-items-center">
             <div class="col-lg-6 hero-content">
                 <h1 class="hero-title animate__animated animate__fadeInUp">cleartrack Student Clearance System</h1>
-                <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">
-                    Modernize your institution's clearance process with a secure, efficient, and paperless solution.
-                </p>
-                <div class="animate__animated animate__fadeInUp animate__delay-2s d-flex gap-3 flex-wrap">
-                    <!-- ✅ Sign Up Button -->
-                    <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-pill shadow">
-                        <i class="fas fa-user-plus me-2"></i> Sign Up
+                <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">Modernize your institution's clearance process with a secure, efficient, and paperless solution.</p>
+                <div class="animate__animated animate__fadeInUp animate__delay-2s d-flex gap-3">
+                    <a href="{% url 'accounts:login' %}" class="btn btn-light btn-lg px-4 py-3 rounded-pill shadow">
+                        <i class="fas fa-sign-in-alt me-2"></i> Login to Dashboard
                     </a>
-
-                    <!-- ✅ Sign In Button -->
-                    <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill shadow">
-                        <i class="fas fa-sign-in-alt me-2"></i> Sign In
-                    </a>
-
-                    <!-- ✅ View My Clearance Button -->
                     <button type="button" class="btn btn-outline-light btn-lg px-4 py-3 rounded-pill shadow" data-bs-toggle="modal" data-bs-target="#scanQRModal">
                         <i class="fas fa-qrcode me-2"></i> View My Clearance
                     </button>
@@ -294,7 +282,6 @@
         </div>
     </div>
 </section>
-{% endblock %}
 
 <!-- Features Section -->
 <section class="features-section">
